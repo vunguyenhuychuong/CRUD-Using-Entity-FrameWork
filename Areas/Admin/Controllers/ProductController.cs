@@ -39,6 +39,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
             return View(product);
         }
 
@@ -71,6 +72,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
             return View(product);
         }
 
@@ -87,6 +89,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
             return View(product);
         }
 

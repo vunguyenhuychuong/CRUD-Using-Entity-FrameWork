@@ -114,6 +114,25 @@
     <Content Include="Global.asax" />
     <Content Include="Public\css\all.min.css" />
     <Content Include="Public\css\LayoutAdmin.css" />
+    <Content Include="Public\images\Product\pic-1.png" />
+    <Content Include="Public\images\Product\pic-10.png" />
+    <Content Include="Public\images\Product\pic-11.png" />
+    <Content Include="Public\images\Product\pic-12.png" />
+    <Content Include="Public\images\Product\pic-13.png" />
+    <Content Include="Public\images\Product\pic-14.png" />
+    <Content Include="Public\images\Product\pic-15.png" />
+    <Content Include="Public\images\Product\pic-16.png" />
+    <Content Include="Public\images\Product\pic-17.png" />
+    <Content Include="Public\images\Product\pic-2.png" />
+    <Content Include="Public\images\Product\pic-20.png" />
+    <Content Include="Public\images\Product\pic-3.png" />
+    <Content Include="Public\images\Product\pic-4.png" />
+    <Content Include="Public\images\Product\pic-5.png" />
+    <Content Include="Public\images\Product\pic-6.png" />
+    <Content Include="Public\images\Product\pic-7.png" />
+    <Content Include="Public\images\Product\pic-8.png" />
+    <Content Include="Public\images\Product\pic-9.png" />
+    <Content Include="Public\images\Product\pic-19.png" />
     <Content Include="Public\js\bootstrap.bundle.js" />
     <Content Include="Public\js\bootstrap.bundle.min.js" />
     <Content Include="Public\js\bootstrap.esm.js" />
@@ -230,7 +249,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Public\images\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
