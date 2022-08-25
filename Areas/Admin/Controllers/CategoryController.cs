@@ -50,6 +50,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // GET: Admin/Category/Create
         public ActionResult Create()
         {
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Name", "Id", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Name", "Orders", 0);
             return View();
         }
 
@@ -66,7 +68,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Name", "Id", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Name", "Orders", 0);
             return View(category);
         }
 

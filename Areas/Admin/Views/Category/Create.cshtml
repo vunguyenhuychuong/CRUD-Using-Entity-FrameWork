@@ -47,17 +47,19 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Chủ đề cha</label>
-                    @Html.EditorFor(model => model.ParentId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.ParentId,(SelectList)ViewBag.ListCat, "--Chọn cấp cha-" , new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label>Sắp xếp</label>
-                    @Html.EditorFor(model => model.Orders, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.Orders, (SelectList)ViewBag.ListCat , new { @class = "form-control" } )
                     @Html.ValidationMessageFor(model => model.Orders, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label>Mô tả trạng thái</label>
-                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.Status, new[] {
+                    new  SelectListItem { Text = "Chưa xuất bản", Value = "2" },
+                    new  SelectListItem { Text= "Xuất bản", Value="1" } }, new { @class="form-control"})
                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                 </div>
             </div>

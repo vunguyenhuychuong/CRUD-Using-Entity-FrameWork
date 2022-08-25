@@ -18,9 +18,9 @@ namespace ShopThoiTrang.Models
 
         public string Slug { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
-        public int Orders { get; set; }
+        public int? Orders { get; set; }
 
         [Required]
         public string MetaKey { get; set; }
