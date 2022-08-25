@@ -5,114 +5,81 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-uppercase text-danger">Danh sách sản phẩm</strong>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="@Url.Action("Create", "Product")" class="btn btn-sm btn-success">
+                    <i class="fas fa-plus"></i> Thêm
+                </a>
+                <a href="@Url.Action("Trash", "Product")" class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash-alt"></i> Thùng rác
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-3">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width:20px;" class="text-center">#</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Loại sản phẩm</th>
+                    <th style="width:180px;" class="text-center">Chức năng</th>
+                    <th style="width:20px;" class="text-center">ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <input name="checkId" type="checkbox" />
+                        </td>
+                        <td>@item.Name</td>
+                        <td>
+                            <img src="~/Public/images/Product/pic-1.png" class="img-fluid"/>
+                        </td>
+                        <td>@item.CatId</td>
+                        <td>
+                            <a href="~/san-pham/@item.Slug">
+                                @item.Slug
+                            </a>
+                        </td>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CatId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Slug)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Detail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetaKey)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Metadesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Img)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pricesale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+                        <td class="text-center">
+                            @if (item.Status == 1)
+                            {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CatId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Slug)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Detail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetaKey)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Metadesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Img)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricesale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                                <a href="@Url.Action("Status", "Product", new { @id = item.Id })" class="btn btn-sm btn-success">
+                                    <i class="fas fa-toggle-on"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Status", "Product", new { @id = item.Id })" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-toggle-off"></i>
+                                </a>
+                            }
+                            <a href="@Url.Action("Edit", "Product", new { @id = item.Id })" class="btn btn-sm btn-info">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="@Url.Action("Details", "Product", new { @id = item.Id })" class="btn btn-sm btn-warning">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="@Url.Action("DelTrash", "Product", new { @id = item.Id })" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">@item.Id</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-</table>
+</div>

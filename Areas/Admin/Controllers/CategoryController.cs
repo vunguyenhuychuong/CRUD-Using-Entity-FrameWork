@@ -65,6 +65,10 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {   
+                if(category.ParentId == null)
+                {
+                    category.ParentId = 0;
+                }
                 string slug = XString.Str_Slug(category.Name);
                 category.Slug = slug;
                 category.Created_At = DateTime.Now;
@@ -106,6 +110,10 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (category.ParentId == null)
+                {
+                    category.ParentId = 0;
+                }
                 string slug = XString.Str_Slug(category.Name);
                 category.Slug = slug;
                 category.Created_At = DateTime.Now;

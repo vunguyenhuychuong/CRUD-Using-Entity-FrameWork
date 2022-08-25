@@ -17,7 +17,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            var list = db.Products.Where(m => m.Status != 0).ToList();
+            return View(list);
         }
 
         // GET: Admin/Product/Details/5
