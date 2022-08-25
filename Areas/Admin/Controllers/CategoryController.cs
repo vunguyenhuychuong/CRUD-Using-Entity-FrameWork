@@ -68,7 +68,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
                 string slug = XString.Str_Slug(category.Name);
                 category.Slug = slug;
                 category.Created_At = DateTime.Now;
-                category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+                category.Created_By = int.Parse(Session["UserAdmin"].ToString());
                 category.Updated_At = DateTime.Now;
                 category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
                 db.Categorys.Add(category);
@@ -92,6 +92,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Orders", "Name", 0);
             return View(category);
         }
 
@@ -100,14 +102,20 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Slug,ParentId,Orders,MetaKey,Metadesc,Created_By,Created_At,Updated_By,Updated_At,Status")] Category category)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
+                string slug = XString.Str_Slug(category.Name);
+                category.Slug = slug;
+                category.Created_At = DateTime.Now;
+                category.Created_By = int.Parse(Session["UserAdmin"].ToString());
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Orders", "Name", 0);
             return View(category);
         }
 
