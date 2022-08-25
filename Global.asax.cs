@@ -14,5 +14,11 @@ namespace ShopThoiTrang
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        //??i t??ng l?u Json
+        protected void Session_Start()
+        {
+            Session["UserAdmin"] = "1";
+        }
     }
 }

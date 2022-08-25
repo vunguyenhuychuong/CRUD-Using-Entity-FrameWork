@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopThoiTrang.Library;
 using ShopThoiTrang.Models;
 
 namespace ShopThoiTrang.Areas.Admin.Controllers
@@ -50,8 +51,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // GET: Admin/Category/Create
         public ActionResult Create()
         {
-            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Name", "Id", 0);
-            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Name", "Orders", 0);
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Orders", "Name", 0);
             return View();
         }
 
@@ -60,16 +61,22 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Slug,ParentId,Orders,MetaKey,Metadesc,Created_By,Created_At,Updated_By,Updated_At,Status")] Category category)
+        public ActionResult Create( Category category)
         {
             if (ModelState.IsValid)
-            {
+            {   
+                string slug = XString.Str_Slug(category.Name);
+                category.Slug = slug;
+                category.Created_At = DateTime.Now;
+                category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+                category.Updated_At = DateTime.Now;
+                category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
                 db.Categorys.Add(category);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Category");
             }
-            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Name", "Id", 0);
-            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Name", "Orders", 0);
+            ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
+            ViewBag.ListOrder = new SelectList(db.Categorys.ToList(), "Orders", "Name", 0);
             return View(category);
         }
 
