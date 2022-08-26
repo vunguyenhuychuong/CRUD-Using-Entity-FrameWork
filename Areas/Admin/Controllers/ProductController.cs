@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ShopThoiTrang.Library;
 using ShopThoiTrang.Models;
 
 namespace ShopThoiTrang.Areas.Admin.Controllers
@@ -48,13 +50,34 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CatId,Name,Slug,Detail,MetaKey,Metadesc,Img,Number,Price,Pricesale,Created_By,Created_At,Updated_By,Updated_At,Status")] Product product)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
-            {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            {             
+                    string slug = XString.Str_Slug(product.Name);
+                    product.Slug = slug;
+                    product.Created_At = DateTime.Now;
+                    product.Created_By = int.Parse(Session["UserAdmin"].ToString());
+                    product.Updated_At = DateTime.Now;
+                    product.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+                    //Hình ảnh
+                    var Img = Request.Files["fileimg"];
+                    string[] FileExtention = { ".jpg", ".png", ".gif" };
+                    if(Img.ContentLength != 0)
+                    {
+                        if (FileExtention.Contains(Img.FileName.Substring(Img.FileName.LastIndexOf("."))))
+                        {
+                            //Đúng hình (Upload file) vd: aaa.jpg, .png
+                            string imgName = slug + Img.FileName.Substring(Img.FileName.LastIndexOf("."));//lấy dc đuôi của ảnh 
+                            product.Img = imgName; // Lưu vào database
+                            string PathImg = Path.Combine(Server.MapPath("~/Public/images/Product/"), imgName);
+                            Img.SaveAs(PathImg); // Lưu file lên server
+                        }
+                    }
+                    //
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");             
             }
             ViewBag.ListCat = new SelectList(db.Categorys.ToList(), "Id", "Name", 0);
             return View(product);
@@ -81,10 +104,36 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CatId,Name,Slug,Detail,MetaKey,Metadesc,Img,Number,Price,Pricesale,Created_By,Created_At,Updated_By,Updated_At,Status")] Product product)
+        public ActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
+                string slug = XString.Str_Slug(product.Name);
+                product.Slug = slug;
+                product.Updated_At = DateTime.Now;
+                product.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+                //Hình ảnh
+                var Img = Request.Files["fileimg"];
+                string[] FileExtention = { ".jpg", ".png", ".gif" };
+                if (Img.ContentLength != 0)
+                {
+                    if (FileExtention.Contains(Img.FileName.Substring(Img.FileName.LastIndexOf("."))))
+                    {
+                        //Đúng hình (Upload file) vd: aaa.jpg, .png
+                        string imgName = slug + Img.FileName.Substring(Img.FileName.LastIndexOf("."));//lấy dc đuôi của ảnh 
+
+                        //Xóa hình
+                        String DelPath = Path.Combine(Server.MapPath("~/Public/images/Product/"), product.Img);
+                        if (System.IO.File.Exists(DelPath))
+                        {
+                            System.IO.File.Delete(DelPath);// kiểm tra tồn tại của path mới dc xóa
+                        }
+
+                        product.Img = imgName; // Lưu vào database
+                        string PathImg = Path.Combine(Server.MapPath("~/Public/images/Product/"), imgName);
+                        Img.SaveAs(PathImg); // Lưu file lên server
+                    }
+                }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

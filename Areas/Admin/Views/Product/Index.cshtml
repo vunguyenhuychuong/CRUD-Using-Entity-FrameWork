@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th style="width:20px;" class="text-center">#</th>
-                    <th>Tên sản phẩm</th>
+                    <th style="width:100px;" class="text-center">Hình</th>
                     <th>Tên sản phẩm</th>
                     <th>Loại sản phẩm</th>
                     <th style="width:180px;" class="text-center">Chức năng</th>
@@ -40,16 +40,12 @@
                         <td class="text-center">
                             <input name="checkId" type="checkbox" />
                         </td>
+                        <td>
+                            <img src="~/Public/images/Product/@item.Img" class="img-fluid" />
+                        </td>
                         <td>@item.Name</td>
-                        <td>
-                            <img src="~/Public/images/Product/pic-1.png" class="img-fluid"/>
-                        </td>
+
                         <td>@item.CatId</td>
-                        <td>
-                            <a href="~/san-pham/@item.Slug">
-                                @item.Slug
-                            </a>
-                        </td>
 
                         <td class="text-center">
                             @if (item.Status == 1)
