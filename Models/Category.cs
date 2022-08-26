@@ -37,5 +37,7 @@ namespace ShopThoiTrang.Models
         public DateTime? Updated_At { get; set; }
 
         public int Status { get; set; }
+
+        public string CatName { get; set; }
     }
 }

@@ -19,7 +19,35 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult Index()
         {
-            var list = db.Products.Where(m => m.Status != 0).ToList();
+            var list = db.Products
+                .Join(
+                db.Categorys,
+                p=>p.CatId,
+                c=>c.Id,
+                (p,c) => new ProductCategory
+                {
+                    Id = p.Id,
+                    CatId = p.CatId,
+                    Name = p.Name,
+                    Slug = p.Slug,
+                    Detail = p.Detail,
+                    Metadesc = p.Metadesc,
+                    MetaKey = p.MetaKey,
+                    Img = p.Img,
+                    Number = p.Number,
+                    Price = p.Price,
+                    Pricesale = p.Pricesale,
+                    Created_At = p.Created_At,
+                    Created_By = p.Created_By,
+                    Updated_At = p.Updated_At,
+                    Updated_By = p.Updated_By,
+                    Status = p.Status,
+                    CatName = p.Name
+                }
+                )
+                .Where(m => m.Status != 0)
+                .OrderByDescending(m=>m.Created_At)
+                .ToList();
             return View(list);
         }
 

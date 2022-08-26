@@ -164,6 +164,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ShopThoiTrangDBContext.cs" />
     <Compile Include="Models\Slider.cs" />
     <Compile Include="Models\Topic.cs" />
