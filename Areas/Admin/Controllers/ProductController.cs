@@ -196,6 +196,45 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        //Thay đổi trạng thái 1 -> 2, 2-> 1
+        public ActionResult Status(int id)
+        {
+            Product product = db.Products.Find(id);
+            int status = (product.Status == 1) ? 2 : 1;
+            product.Status = status;
+            product.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+            product.Created_At = DateTime.Now;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //Xóa vào thùng rác Status = 0
+        public ActionResult DelTrash(int id)
+        {
+            Product product = db.Products.Find(id);
+            product.Status = 0;
+            product.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+            product.Created_At = DateTime.Now;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Product");
+
+        }
+
+        //Khôi phục rác Status = 2
+        public ActionResult ReTrash(int id)
+        {
+            Product product = db.Products.Find(id);
+            product.Status = 2;
+            product.Updated_By = int.Parse(Session["UserAdmin"].ToString());
+            product.Created_At = DateTime.Now;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Trash", "Product");
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

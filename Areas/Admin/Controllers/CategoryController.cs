@@ -159,7 +159,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
             Category category = db.Categorys.Find(id);
             int status = (category.Status == 1) ? 2 : 1;
             category.Status = status;
-            category.Updated_By = 1;
+            category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
             category.Created_At = DateTime.Now;
             db.Entry(category).State = EntityState.Modified;
             db.SaveChanges();
@@ -171,7 +171,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         {
             Category category = db.Categorys.Find(id);
             category.Status = 0;
-            category.Updated_By = 1;
+            category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
             category.Created_At = DateTime.Now;
             db.Entry(category).State = EntityState.Modified;
             db.SaveChanges();
@@ -184,7 +184,7 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
         {
             Category category = db.Categorys.Find(id);
             category.Status = 2;
-            category.Updated_By = 1;
+            category.Updated_By = int.Parse(Session["UserAdmin"].ToString());
             category.Created_At = DateTime.Now;
             db.Entry(category).State = EntityState.Modified;
             db.SaveChanges();
