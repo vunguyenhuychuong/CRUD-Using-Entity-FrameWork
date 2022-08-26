@@ -10,7 +10,8 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
     {
         // GET: Admin/Dashboard
         public ActionResult Index()
-        {
+        {   
+            //Kiểm tra chứa đăng nhập
             return View();
         }
     }

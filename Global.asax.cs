@@ -18,7 +18,9 @@ namespace ShopThoiTrang
         //??i t??ng l?u Json
         protected void Session_Start()
         {
-            Session["UserAdmin"] = "1";
+            Session["UserAdmin"] = "";
+            Session["UserId"] = "";
+            //Nhi?u bi?n khác 
         }
     }
 }

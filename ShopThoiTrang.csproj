@@ -198,6 +198,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Controllers\TrangchuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -380,6 +381,8 @@
     <Content Include="Public\scss\bootstrap\scss\_variables.scss" />
     <Content Include="Public\scss\style.scss" />
     <Content Include="Views\Module\ListCategoryMenu.cshtml" />
+    <Content Include="Views\Sanpham\ProductCategory.cshtml" />
+    <Content Include="Views\Trangchu\ProductHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

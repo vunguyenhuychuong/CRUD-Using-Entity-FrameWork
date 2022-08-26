@@ -12,6 +12,11 @@ namespace ShopThoiTrang
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "San-Pham-ThaoLoia",
+                url: "loai-san-pham/{slug}",
+                defaults: new { controller = "Sanpham", action = "Category", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
