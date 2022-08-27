@@ -20,7 +20,10 @@ namespace ShopThoiTrang
         {
             Session["UserAdmin"] = "";
             Session["UserId"] = "";
+            Session["FullName"] = "";
+            Session["Img"] = "";
             //Nhi?u bi?n khác 
         }
+
     }
 }

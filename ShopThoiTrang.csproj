@@ -185,6 +185,12 @@
     <Content Include="Public\mail\contact.js" />
     <Content Include="Public\mail\contact.php" />
     <Content Include="Public\mail\jqBootstrapValidation.min.js" />
+    <Content Include="Public\template\adminlte.min.css" />
+    <Content Include="Public\template\adminlte.min.js" />
+    <Content Include="Public\template\all.min.css" />
+    <Content Include="Public\template\bootstrap.bundle.min.js" />
+    <Content Include="Public\template\icheck-bootstrap.min.css" />
+    <Content Include="Public\template\jquery.min.js" />
     <Content Include="Public\webfonts\fa-brands-400.svg" />
     <Content Include="Public\webfonts\fa-regular-400.svg" />
     <Content Include="Public\webfonts\fa-solid-900.svg" />
@@ -193,6 +199,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
@@ -263,6 +271,7 @@
     <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Topic\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Topic\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -393,6 +402,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>

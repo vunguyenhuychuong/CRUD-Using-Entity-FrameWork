@@ -10,8 +10,13 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
     {
         // GET: Admin/Dashboard
         public ActionResult Index()
-        {   
+        {
             //Kiểm tra chứa đăng nhập
+            if (Session["UserAdmin"].ToString()=="")
+            {
+                //Chuyển hướng website
+                Redirect("~/Admin/login");
+            }
             return View();
         }
     }

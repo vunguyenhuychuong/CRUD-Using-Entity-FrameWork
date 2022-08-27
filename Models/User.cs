@@ -14,22 +14,30 @@ namespace ShopThoiTrang.Models
         public int Id { get; set; }
 
         [Required]
-        public string FullName { get; set; }
+        public string UserName { get; set; }
 
-        public string Email { get; set; }
         [Required]
-        public string Phone { get; set; }
-
-        public string Username { get; set; }
-
         public string Password { get; set; }
 
+        [Required]
+        public string FullName { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+        
+        public string Phone { get; set; }
+
+        public string Img { get; set; }
+
+        public int? CountError { get; set; }
+
+        [Required]
         public string Roles { get; set; }
 
-        [Required]
-        public string Content { get; set; }
+        public int? Gender { get; set; }
 
-        [Required]
+        public string Address { get; set; }
+
         public int? Created_By { get; set; }
 
         public DateTime? Created_At { get; set; }

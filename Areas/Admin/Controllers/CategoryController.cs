@@ -11,13 +11,15 @@ using ShopThoiTrang.Models;
 
 namespace ShopThoiTrang.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private ShopThoiTrangDBContext db = new ShopThoiTrangDBContext();
 
-        // GET: Admin/Category
+        // GET: Admin/Category/Index
         public ActionResult Index()
-        {   
+        {
+            
+            ViewBag.Title = "Danh sách loại sản phẩm";
             var list = db.Categorys.Where(m => m.Status!=0)
                 .OrderByDescending(m=>m.Created_At)
                 .ToList();
@@ -27,6 +29,10 @@ namespace ShopThoiTrang.Areas.Admin.Controllers
 
         public ActionResult Trash()
         {
+            if (Session["UserAdmin"].Equals(""))
+            {
+                return Redirect("~/admin/login");
+            }
             var list = db.Categorys.Where(m => m.Status == 0)
                 .OrderByDescending(m => m.Created_At)
                 .ToList();
